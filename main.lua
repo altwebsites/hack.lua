@@ -1,14 +1,13 @@
--- Simple Test Script for altwebsites
-local ScreenGui = Instance.new("ScreenGui")
-local TextLabel = Instance.new("TextLabel")
+local url = "https://raw.githubusercontent.com/altwebsites/hack.lua/main/main.lua" -- Put your copied link here
 
-ScreenGui.Parent = game.CoreGui
-TextLabel.Parent = ScreenGui
-TextLabel.Size = UDim2.new(0, 200, 0, 50)
-TextLabel.Position = UDim2.new(0.5, -100, 0, 50)
-TextLabel.Text = "GitHub Script Loaded Successfully!"
-TextLabel.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+local success, result = pcall(function()
+    return game:HttpGet(url)
+end)
 
-print("altwebsites script is now running!")
-wait(5)
-ScreenGui:Destroy()
+if success then
+    print("Success! Code found. Running now...")
+    loadstring(result)()
+else
+    warn("HTTP Error: " .. tostring(result))
+    print("Make sure your Repo is PUBLIC and the link is RAW.")
+end
