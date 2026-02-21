@@ -4,9 +4,8 @@ local success, result = pcall(function()
     return game:HttpGet(url)
 end)
 
-if success then
-    print("Success! Code found. Running now...")
-    loadstring(result)()
+
+print("altwebsites script loaded successfully!")
 else
     warn("HTTP Error: " .. tostring(result))
     print("Make sure your Repo is PUBLIC and the link is RAW.")
