@@ -1,4 +1,6 @@
 -- ANTI-SPAM & WAIT
+print("VOIDWARE DEBUG: SCRIPT IS RUNNING")
+
 repeat task.wait() until game:IsLoaded()
 if _G.VoidwareLoaded then return end
 _G.VoidwareLoaded = true
