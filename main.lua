@@ -1,46 +1,50 @@
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-local humanoid = character:WaitForChild("Humanoid")
+-- Only run once
+if _G.VoidwareLoaded then return end
+_G.VoidwareLoaded = true
 
--- Create the UI
+local player = game.Players.LocalPlayer
+local userInput = game:GetService("UserInputService")
 local sg = Instance.new("ScreenGui")
-sg.Name = "SpeedControl"
-sg.Parent = game.CoreGui
+sg.Name = "VoidwareRemix"
+sg.Parent = player:WaitForChild("PlayerGui")
 sg.ResetOnSpawn = false
 
-local frame = Instance.new("Frame")
-frame.Size = UDim2.new(0, 200, 0, 100)
-frame.Position = UDim2.new(0.5, -100, 0.5, -50)
-frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-frame.Active = true
-frame.Draggable = true -- So you can move it around
-frame.Parent = sg
+-- Main Window
+local main = Instance.new("Frame")
+main.Size = UDim2.new(0, 260, 0, 200)
+main.Position = UDim2.new(0.5, -130, 0.4, 0)
+main.BackgroundColor3 = Color3.fromRGB(10, 10, 10) -- Even darker
+main.BorderSizePixel = 0
+main.Active = true
+main.Draggable = true
+main.Parent = sg
 
-local label = Instance.new("TextLabel")
-label.Size = UDim2.new(1, 0, 0, 30)
-label.Text = "Enter WalkSpeed:"
-label.TextColor3 = Color3.new(1, 1, 1)
-label.BackgroundTransparency = 1
-label.Parent = frame
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 10)
+corner.Parent = main
 
-local textBox = Instance.new("TextBox")
-textBox.Size = UDim2.new(0.8, 0, 0, 40)
-textBox.Position = UDim2.new(0.1, 0, 0.4, 0)
-textBox.PlaceholderText = "16"
-textBox.Text = ""
-textBox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-textBox.TextColor3 = Color3.new(1, 1, 1)
-textBox.Parent = frame
+-- Neon Border/Glow effect
+local stroke = Instance.new("UIStroke")
+stroke.Color = Color3.fromRGB(120, 0, 255)
+stroke.Thickness = 2
+stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+stroke.Parent = main
 
--- Handle the speed change
-textBox.FocusLost:Connect(function(enterPressed)
-    if enterPressed then
-        local newSpeed = tonumber(textBox.Text)
-        if newSpeed then
-            humanoid.WalkSpeed = newSpeed
-            print("Speed set to: " .. newSpeed)
-        else
-            textBox.Text = "Invalid Number"
-        end
-    end
-end)
+-- Top Bar
+local topBar = Instance.new("Frame")
+topBar.Size = UDim2.new(1, 0, 0, 35)
+topBar.BackgroundColor3 = Color3.fromRGB(120, 0, 255)
+topBar.BorderSizePixel = 0
+topBar.Parent = main
+
+local topCorner = Instance.new("UICorner")
+topCorner.CornerRadius = UDim.new(0, 10)
+topCorner.Parent = topBar
+
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 1, 0)
+title.Text = "VOIDWARE [BETA]"
+title.TextColor3 = Color3.new(1, 1, 1)
+title.Font = Enum.Font.GothamBold
+title.TextSize = 14
+title.BackgroundTransparency =
